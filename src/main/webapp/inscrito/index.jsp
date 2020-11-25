@@ -47,7 +47,18 @@
                             <div class="col-lg-12">
                                 <div class="card card-primary card-outline">
                                     <div class="card-header">
-                                        <h5 class="m-0">Listado de inscritps</h5>
+                                        <h3 class="card-title">
+                                            Listado de inscritos
+                                        </h3>
+                                        <div class="card-tools">
+                                            <ul class="nav nav-pills ml-auto">
+                                                <li class="nav-item">
+                                                    <button class="btn btn-primary" data-toggle="modal" data-target="#modal-default">
+                                                        <i class="fas fa-plus-circle"></i> Nuevo
+                                                    </button>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
                                     <div class="card-body">
                                         <table id="tabla-listado" class="table table-bordered table-hover">
@@ -71,7 +82,7 @@
                                                     <td><%=inscrito.getNombres()%></td>
                                                     <td><%=inscrito.getCelular()%></td>
                                                     <td>
-                                                        <button class="btn btn-warning btn-sm">Editar</button>
+                                                        <a href="${url_aplicacion}/admin/inscrito/editar/<%=inscrito.getId()%>" class="btn btn-warning btn-sm">Editar</a>
                                                     </td>
                                                     <td>
                                                         <button class="btn btn-danger btn-sm">Eliminar</button>
@@ -103,7 +114,52 @@
                 <!-- /.content -->
             </div>
             <!-- /.content-wrapper -->
-
+            <div class="modal fade" id="modal-default">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Registrar persona</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form class="form-horizontal">
+                            <div class="modal-body">
+                                <div class="form-group row">
+                                    <label for="apellido_paterno" class="col-sm-3 col-form-label">Apellido paterno:</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="apellido_paterno" placeholder="Apellido paterno">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="apellido_materno" class="col-sm-3 col-form-label">Apellido materno:</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="apellido_materno" placeholder="Apellido apellido materno">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="nombres" class="col-sm-3 col-form-label">Nombres:</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="nombres" placeholder="Nombres">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="celular" class="col-sm-3 col-form-label">Celular:</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="celular" placeholder="Celular">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer justify-content-between">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
             <!-- Control Sidebar -->
             <jsp:include page="../plantilla/sidebar-controls.jsp" />
             <!-- /.control-sidebar -->

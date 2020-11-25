@@ -7,21 +7,18 @@ package org.ceti.sistemas.proyectoceti.controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.ceti.sistemas.proyectoceti.beans.Inscrito;
-import org.ceti.sistemas.proyectoceti.models.InscritoModel;
 
 /**
  *
  * @author Dario
  */
-@WebServlet(name = "InscritoController", urlPatterns = {"/admin/inscrito/*"})
-public class InscritoController extends HttpServlet {
+@WebServlet(name = "CursoController", urlPatterns = {"/admin/curso/*"})
+public class CursoController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +37,11 @@ public class InscritoController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet InscritoController</title>");
+            out.println("<title>Servlet CursoController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet InscritoController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet CursoController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet CursoController at " + request.getPathInfo()+ "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,30 +59,7 @@ public class InscritoController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String pathInfo = request.getPathInfo();
-        if (pathInfo == null || "/".equals(pathInfo)) {
-            System.out.println("Hola2");
-            InscritoModel inscritoModel = new InscritoModel();
-            ArrayList<Inscrito> listado = inscritoModel.todos();
-            request.setAttribute("listado_inscritos", listado);
-            request.getRequestDispatcher("/inscrito/index.jsp").forward(request, response);
-        } else {
-            pathInfo = pathInfo.substring(1);
-            String[] ruta = pathInfo.split("/");
-            switch (ruta[0]) {
-                case "crear":
-                    request.getRequestDispatcher("/inscrito/crear.jsp").forward(request, response);
-                case "editar":
-                    Integer idInscrito = Integer.parseInt(ruta[1]);
-                    InscritoModel inscritoModel = new InscritoModel();
-                    Inscrito inscrito = inscritoModel.obtenerPorId(idInscrito);
-                    request.setAttribute("inscrito", inscrito);
-                    request.getRequestDispatcher("/inscrito/editar.jsp").forward(request, response);
-                default:
-                    break;
-            }
-        }
-
+        processRequest(request, response);
     }
 
     /**
