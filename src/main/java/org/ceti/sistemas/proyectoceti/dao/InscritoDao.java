@@ -11,9 +11,8 @@ import org.ceti.sistemas.proyectoceti.utils.LogManager;
 public class InscritoDao {
     private final Connection conexion;
     
-    public InscritoDao(){
-        Conexion db = new Conexion();
-        this.conexion = db.obtenerConexion();
+    public InscritoDao(Connection conexion){
+        this.conexion = conexion;
     }
     
     private Integer ultimoRegistro(){

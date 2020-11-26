@@ -1,15 +1,20 @@
 package org.ceti.sistemas.proyectoceti.models;
 
+import java.sql.Connection;
 import java.util.ArrayList;
 import org.ceti.sistemas.proyectoceti.beans.Inscrito;
+import org.ceti.sistemas.proyectoceti.dao.Conexion;
 import org.ceti.sistemas.proyectoceti.dao.InscritoDao;
 
 public class InscritoModel {
 
     private final InscritoDao inscritoDao;
+    private final Connection conexion;
 
     public InscritoModel() {
-        inscritoDao = new InscritoDao();
+        Conexion conn = new Conexion();
+        this.conexion = conn.obtenerConexion();
+        inscritoDao = new InscritoDao(this.conexion);
     }
 
     // 
