@@ -51,7 +51,7 @@
                                             Editar inscrito
                                         </h3>
                                     </div>
-                                    <form role="form" class="form-horizontal" id="quickForm">
+                                    <form role="form" class="form-horizontal" id="formulario_editar" method="POST"  action="${url_aplicacion}/admin/inscrito/editar/<%=inscrito.getId()%>">
                                         <div class="card-body">
                                             <div class="form-group row">
                                                 <label for="apellido_paterno" class="col-sm-3 col-form-label">Apellido paterno:</label>
@@ -62,26 +62,26 @@
                                             <div class="form-group row">
                                                 <label for="apellido_materno" class="col-sm-3 col-form-label">Apellido materno:</label>
                                                 <div class="col-sm-9 div-input">
-                                                    <input type="text" class="form-control" id="apellido_materno" name="apellido_materno" placeholder="Apellido apellido materno">
+                                                    <input type="text" class="form-control" id="apellido_materno" name="apellido_materno" value="<%=inscrito.getApellido_materno()%>" placeholder="Apellido apellido materno">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label for="nombres" class="col-sm-3 col-form-label">Nombres:</label>
                                                 <div class="col-sm-9 div-input">
-                                                    <input type="text" class="form-control" id="nombres" name="nombres" placeholder="Nombres">
+                                                    <input type="text" class="form-control" id="nombres" name="nombres" value="<%=inscrito.getNombres()%>" placeholder="Nombres">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label for="celular" class="col-sm-3 col-form-label">Celular:</label>
                                                 <div class="col-sm-9 div-input">
-                                                    <input type="text" class="form-control" id="celular" name="celular" placeholder="Celular">
+                                                    <input type="text" class="form-control" id="celular" name="celular" value="<%=inscrito.getCelular()%>" placeholder="Celular">
                                                 </div>
                                             </div>
                                         </div>
                                         <!-- /.card-body -->
                                         <div class="card-footer">
-                                            <button type="submit" class="btn btn-info">Registrar</button>
-                                            <a href="${url_aplicacion}/admin/inscrito" class="btn btn-default float-right">Retornar</a>
+                                            <a href="${url_aplicacion}/admin/inscrito" class="btn btn-outline-primary">Retornar</a>
+                                            <button type="submit" class="btn btn-info  float-right">Actualizar</button>
                                         </div>
                                         <!-- /.card-footer -->
                                     </form>
@@ -109,11 +109,11 @@
         <script type="text/javascript">
             $(document).ready(function () {
                 $.validator.setDefaults({
-                    submitHandler: function () {
-                        alert("Form successful submitted!");
+                    submitHandler: function (form) {
+                        form.submit();
                     }
                 });
-                $('#quickForm').validate({
+                $('#formulario_editar').validate({
                     rules: {
                         apellido_paterno: {
                             required: true,

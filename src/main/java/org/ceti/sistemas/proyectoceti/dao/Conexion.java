@@ -25,7 +25,7 @@ public class Conexion {
             Class.forName("com.mysql.cj.jdbc.Driver");
             // Paso 03: Definir la URL de conexión
             String url = "jdbc:mysql://" + servidor + ":" + puerto + "/" + base
-                    + "?useSSL=false&serverTimezone=America/Lima";
+                    + "?useSSL=false&serverTimezone=America/Lima&useUnicode=true&characterEncoding=utf-8";
             this.conexion = DriverManager.getConnection(url, usuario, password);
             System.out.println("Conexión exitosa");
         } catch (ClassNotFoundException | SQLException error) {

@@ -6,13 +6,13 @@
 package org.ceti.sistemas.proyectoceti.controllers;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.ceti.sistemas.proyectoceti.beans.Inscrito;
 import org.ceti.sistemas.proyectoceti.models.InscritoModel;
 
@@ -22,32 +22,6 @@ import org.ceti.sistemas.proyectoceti.models.InscritoModel;
  */
 @WebServlet(name = "InscritoController", urlPatterns = {"/admin/inscrito/*"})
 public class InscritoController extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet InscritoController</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet InscritoController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -63,10 +37,10 @@ public class InscritoController extends HttpServlet {
             throws ServletException, IOException {
         String pathInfo = request.getPathInfo();
         if (pathInfo == null || "/".equals(pathInfo)) {
-            System.out.println("Hola2");
             InscritoModel inscritoModel = new InscritoModel();
             ArrayList<Inscrito> listado = inscritoModel.todos();
             request.setAttribute("listado_inscritos", listado);
+            request.setAttribute("menu_activo", "admin/inscrito");
             request.getRequestDispatcher("/inscrito/index.jsp").forward(request, response);
         } else {
             pathInfo = pathInfo.substring(1);
@@ -81,6 +55,8 @@ public class InscritoController extends HttpServlet {
                     request.setAttribute("inscrito", inscrito);
                     request.getRequestDispatcher("/inscrito/editar.jsp").forward(request, response);
                 default:
+                    request.getRequestDispatcher("/errores/404.jsp").forward(request, response);
+//                    response.sendError(HttpServletResponse.SC_NOT_FOUND);
                     break;
             }
         }
@@ -98,7 +74,52 @@ public class InscritoController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        request.setCharacterEncoding("UTF-8");
+        String pathInfo = request.getPathInfo();
+        if (pathInfo == null || "/".equals(pathInfo)) {
+            InscritoModel inscritoModel = new InscritoModel();
+            ArrayList<Inscrito> listado = inscritoModel.todos();
+            request.setAttribute("listado_inscritos", listado);
+            request.setAttribute("menu_activo", "admin/inscrito");
+            request.getRequestDispatcher("/inscrito/index.jsp").forward(request, response);
+        } else {
+            pathInfo = pathInfo.substring(1);
+            String[] ruta = pathInfo.split("/");
+            InscritoModel inscritoModel = new InscritoModel();
+            Inscrito inscrito;
+            HttpSession sesion = request.getSession();
+            switch (ruta[0]) {
+                case "crear":
+                    inscrito = new Inscrito();
+                    inscrito.setNombres(request.getParameter("nombres"));
+                    inscrito.setApellido_paterno(request.getParameter("apellido_paterno"));
+                    inscrito.setApellido_materno(request.getParameter("apellido_materno"));
+                    inscrito.setCelular(request.getParameter("celular"));
+                    inscritoModel.registrar(inscrito);
+                    sesion.setAttribute("mensaje", "Registrado correctamente");
+                    response.sendRedirect(request.getContextPath() + "/admin/inscrito");
+                    break;
+                case "editar":
+                    inscrito = inscritoModel.obtenerPorId(Integer.parseInt(ruta[1]));
+                    inscrito.setNombres(request.getParameter("nombres"));
+                    inscrito.setApellido_paterno(request.getParameter("apellido_paterno"));
+                    inscrito.setApellido_materno(request.getParameter("apellido_materno"));
+                    inscrito.setCelular(request.getParameter("celular"));
+                    inscritoModel.actualizar(inscrito);
+                    sesion.setAttribute("mensaje", "Actualizado correctamente");
+                    response.sendRedirect(request.getContextPath() + "/admin/inscrito");
+                    break;
+                case "eliminar":
+                    inscrito = inscritoModel.obtenerPorId(Integer.parseInt(ruta[1]));
+                    inscritoModel.eliminar(inscrito.getId());
+                    sesion.setAttribute("mensaje", "Eliminado correctamente");
+                    response.sendRedirect(request.getContextPath() + "/admin/inscrito");
+                    break;
+                default:
+                    response.sendRedirect(request.getContextPath() + "/admin/inscrito");
+                    break;
+            }
+        }
     }
 
     /**

@@ -1,3 +1,9 @@
+<%@page import="org.ceti.sistemas.proyectoceti.beans.Usuario"%>
+<%
+    String menu_activo = (request.getAttribute("menu_activo") != null) ? (String) request.getAttribute("menu_activo") : "";
+    Usuario usuario = (Usuario) session.getAttribute("usuario");
+    String[][] menu_usuario = (String[][]) session.getAttribute("menu_usuario");
+%>
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
@@ -15,22 +21,27 @@
                 <img src="${url_aplicacion}/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Nombre de usuario</a>
+                <a href="#" class="d-block"><%=usuario.getInscrito().getNombres() + " " + usuario.getInscrito().getApellido_paterno()%></a>
             </div>
         </div>
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <%
+                    for (String[] menu : menu_usuario) {
+                        String activo = (menu[0].equals(menu_activo)) ? "active" : "";
+                %>
                 <li class="nav-item">
-                    <a href="#" class="nav-link active">
+                    <a href="${url_aplicacion}/<%=menu[0]%>" class="nav-link <%=activo%>">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
-                            Inscritos
-                            <span class="right badge badge-danger">New</span>
+                            <%=menu[1]%>
                         </p>
                     </a>
                 </li>
+                <%                    }
+                %>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

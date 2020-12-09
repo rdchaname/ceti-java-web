@@ -35,7 +35,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Iniciar sesión</a>
+                            <a class="nav-link" href="${url_aplicacion}/login">Iniciar sesión</a>
                         </li>
                     </ul>
                 </div>

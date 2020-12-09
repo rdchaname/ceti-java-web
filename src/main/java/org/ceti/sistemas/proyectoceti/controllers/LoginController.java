@@ -54,7 +54,9 @@ public class LoginController extends HttpServlet {
         Usuario usuario = usuarioModel.login(email, password);
         if (usuario != null) {
             HttpSession sesion = request.getSession(true);
+            String[][] menu = {{"admin/inscrito", "Inscritos"}, {"admin/tipo_curso", "Tipos cursos"}, {"admin/curso", "Cursos"}};
             sesion.setAttribute("usuario", usuario);
+            sesion.setAttribute("menu_usuario", menu);
             response.sendRedirect(request.getContextPath() + "/admin");
         } else {
             HttpSession sesion = request.getSession(true);

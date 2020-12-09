@@ -1,4 +1,8 @@
+<%@page import="org.ceti.sistemas.proyectoceti.beans.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+Usuario usuario = (Usuario)session.getAttribute("usuario");
+%>
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -42,7 +46,7 @@
                             <div class="col-lg-12">
                                 <div class="card card-primary card-outline">
                                     <div class="card-header">
-                                        <h5 class="m-0">Nombre de usuarios</h5>
+                                        <h5 class="m-0"><%=usuario.getInscrito().getNombres() + " " + usuario.getInscrito().getApellido_paterno()%></h5>
                                     </div>
                                     <div class="card-body">
                                         <h6 class="card-title">has iniciado sesión</h6>
