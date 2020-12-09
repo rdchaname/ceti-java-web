@@ -67,15 +67,13 @@ public class RegistroController extends HttpServlet {
         UsuarioModel usuarioModel = new UsuarioModel();
         Usuario usuarioregistrado = usuarioModel.registrar(inscrito, usuario);
         if (usuarioregistrado != null) {
-            // Email.enviarConGMail(email, "Nuevo registro", "Se ha registrado en");
+            Email.enviar(email, "Registro en Java Web", "Gracias por registrarse en Cursos Virtuales Java WEB");
             response.sendRedirect(request.getContextPath() + "/login");
         } else {
-            System.out.println("que pasoooooo");
             HttpSession sesion = request.getSession();
             sesion.setAttribute("mensaje_error", "Sucedió un error en el registro");
             response.sendRedirect(request.getContextPath() + "/registro");
         }
-        
     }
 
     /**

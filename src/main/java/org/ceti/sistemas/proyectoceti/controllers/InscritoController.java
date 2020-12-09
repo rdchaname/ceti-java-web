@@ -48,12 +48,14 @@ public class InscritoController extends HttpServlet {
             switch (ruta[0]) {
                 case "crear":
                     request.getRequestDispatcher("/inscrito/crear.jsp").forward(request, response);
+                    break;
                 case "editar":
                     Integer idInscrito = Integer.parseInt(ruta[1]);
                     InscritoModel inscritoModel = new InscritoModel();
                     Inscrito inscrito = inscritoModel.obtenerPorId(idInscrito);
                     request.setAttribute("inscrito", inscrito);
                     request.getRequestDispatcher("/inscrito/editar.jsp").forward(request, response);
+                    break;
                 default:
                     request.getRequestDispatcher("/errores/404.jsp").forward(request, response);
 //                    response.sendError(HttpServletResponse.SC_NOT_FOUND);

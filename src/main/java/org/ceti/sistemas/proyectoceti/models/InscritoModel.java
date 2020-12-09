@@ -3,8 +3,10 @@ package org.ceti.sistemas.proyectoceti.models;
 import java.sql.Connection;
 import java.util.ArrayList;
 import org.ceti.sistemas.proyectoceti.beans.Inscrito;
+import org.ceti.sistemas.proyectoceti.beans.Usuario;
 import org.ceti.sistemas.proyectoceti.dao.Conexion;
 import org.ceti.sistemas.proyectoceti.dao.InscritoDao;
+import org.ceti.sistemas.proyectoceti.dao.UsuarioDao;
 
 public class InscritoModel {
 
@@ -27,6 +29,9 @@ public class InscritoModel {
     }
 
     public Boolean eliminar(Integer id) {
+        UsuarioDao usuarioDao = new UsuarioDao(conexion);
+        Usuario usuario = usuarioDao.obtenerPorIdInscrito(id);
+        usuarioDao.eliminar(usuario.getId());
         return this.inscritoDao.eliminar(id);
     }
 

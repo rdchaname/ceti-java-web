@@ -27,7 +27,6 @@ public class Conexion {
             String url = "jdbc:mysql://" + servidor + ":" + puerto + "/" + base
                     + "?useSSL=false&serverTimezone=America/Lima&useUnicode=true&characterEncoding=utf-8";
             this.conexion = DriverManager.getConnection(url, usuario, password);
-            System.out.println("Conexión exitosa");
         } catch (ClassNotFoundException | SQLException error) {
             System.out.println(error.getMessage());
             LogManager.registrarEvento(error, "SEVERE");

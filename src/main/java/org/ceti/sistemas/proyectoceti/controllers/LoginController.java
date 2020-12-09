@@ -34,6 +34,9 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.addHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+        response.addHeader("Pragma", "no-cache");
+        response.setDateHeader("Expires", 0);
         request.getRequestDispatcher("/auth/login.jsp").forward(request, response);
     }
 

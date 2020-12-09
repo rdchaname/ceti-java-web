@@ -1,4 +1,4 @@
-package org.ceti.sistemas.proyectoceti.utils;
+package email;
 
 import java.util.Properties;
 import javax.mail.Message;
@@ -9,12 +9,14 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-public class Email {
+public class SendMailBySite {
 
-    public static void enviar(String destinatario, String asunto, String cuerpo) {
+    public static void main(String[] args) {
         String host = "mail.yoeduco.pe";
-        final String remitente = "rchaname@yoeduco.pe";// colocar el valor que le de su proveedor
-        final String password = "CetiJavaWeb2020";// colocar el valor que le de su proveedor
+        final String user = "rchaname@yoeduco.pe";//change accordingly  
+        final String password = "CetiJavaWeb2020";//change accordingly  
+
+        String to = "rdchs.25@gmail.com";//change accordingly  
 
         //Get the session object  
         Properties props = new Properties();
@@ -24,20 +26,23 @@ public class Email {
         Session session = Session.getDefaultInstance(props,
                 new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(remitente, password);
+                return new PasswordAuthentication(user, password);
             }
         });
 
         //Compose the message  
         try {
             MimeMessage message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(remitente));
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(destinatario));
-            message.setSubject(asunto);
-            message.setText(cuerpo);
+            message.setFrom(new InternetAddress(user));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+            message.setSubject("javatpoint");
+            message.setText("This is simple program of sending email using JavaMail API");
+
             //send the message  
             Transport.send(message);
-            System.out.println("Mensaje enviado correctamente...");
+
+            System.out.println("message sent successfully...");
+
         } catch (MessagingException e) {
             e.printStackTrace();
         }

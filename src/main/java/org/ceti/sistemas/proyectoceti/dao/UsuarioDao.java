@@ -9,13 +9,13 @@ import org.ceti.sistemas.proyectoceti.beans.Usuario;
 import org.ceti.sistemas.proyectoceti.utils.LogManager;
 
 public class UsuarioDao {
-    
+
     private final Connection conexion;
-    
+
     public UsuarioDao(Connection conexion) {
         this.conexion = conexion;
     }
-    
+
     public Usuario login(String email) {
         Usuario usuario = null;
         try {
@@ -43,7 +43,7 @@ public class UsuarioDao {
         }
         return usuario;
     }
-    
+
     private Integer ultimoRegistro() {
         Integer id = null;
         try {
@@ -58,7 +58,7 @@ public class UsuarioDao {
         }
         return id;
     }
-    
+
     public Usuario registrar(Usuario usuario) {
         Usuario registrado = null;
         try {
@@ -76,5 +76,39 @@ public class UsuarioDao {
             LogManager.registrarEvento(e, "SEVERE");
         }
         return registrado;
+    }
+
+    public Boolean eliminar(Integer id) {
+        Boolean eliminado = false;
+        try {
+            String sql = "DELETE FROM usuarios WHERE id = ?";
+            PreparedStatement prepararConsulta = this.conexion.prepareStatement(sql);
+            prepararConsulta.setInt(1, id);
+            Integer filasEliminadas = prepararConsulta.executeUpdate();
+            if (filasEliminadas > 0) {
+                eliminado = true;
+            }
+        } catch (SQLException error) {
+            LogManager.registrarEvento(error, "SEVERE");
+        }
+        return eliminado;
+    }
+
+    public Usuario obtenerPorIdInscrito(Integer id) {
+        Usuario usuario = null;
+        try {
+            String sql = "SELECT id,email FROM usuarios WHERE inscritos_id = ?";
+            PreparedStatement prepararConsulta = this.conexion.prepareStatement(sql);
+            prepararConsulta.setInt(1, id);
+            ResultSet resultado = prepararConsulta.executeQuery();
+            while (resultado.next()) {
+                usuario = new Usuario();
+                usuario.setEmail(resultado.getString("email"));
+                usuario.setId(resultado.getInt("id"));
+            }
+        } catch (SQLException error) {
+            LogManager.registrarEvento(error, "SEVERE");
+        }
+        return usuario;
     }
 }

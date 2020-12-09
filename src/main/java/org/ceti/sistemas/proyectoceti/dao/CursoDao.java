@@ -63,7 +63,6 @@ public class CursoDao {
                 curso.setNombre(resultado.getString("nombre"));
                 curso.setNombre_corto(resultado.getString("nombre_corto"));
                 curso.setImagen(resultado.getString("imagen"));
-                System.out.println(resultado.getString("costo"));
                 curso.setCosto(resultado.getDouble("costo"));
                 TipoCurso tipo_curso = new TipoCurso();
                 tipo_curso.setId(resultado.getInt("tipo_cursos_id"));
