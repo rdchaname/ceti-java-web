@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Dario
  */
-@WebServlet(name = "CursoController", urlPatterns = {"/admin/curso/*"})
-public class CursoController extends HttpServlet {
+@WebServlet(name = "TipoCursoController", urlPatterns = {"/admin/tipo_curso"})
+public class TipoCursoController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +37,10 @@ public class CursoController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CursoController</title>");            
+            out.println("<title>Servlet TipoCursoController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CursoController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet TipoCursoController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }

@@ -14,7 +14,7 @@
 
         <jsp:include page="plantilla/scripts-header.jsp" />
     </head>
-    <body class="hold-transition sidebar-mini">
+    <body class="hold-transition sidebar-mini layout-fixed">
         <div class="wrapper">
             <jsp:include page="plantilla/navbar.jsp" />
 

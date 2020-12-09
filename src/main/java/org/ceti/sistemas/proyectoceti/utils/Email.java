@@ -12,9 +12,9 @@ import javax.mail.internet.MimeMessage;
 public class Email {
 
     public static void enviar(String destinatario, String asunto, String cuerpo) {
-        String host = "mail.yoeduco.pe";
-        final String remitente = "rchaname@yoeduco.pe";// colocar el valor que le de su proveedor
-        final String password = "CetiJavaWeb2020";// colocar el valor que le de su proveedor
+        String host = "";
+        final String remitente = "";// colocar el valor que le de su proveedor
+        final String password = "";// colocar el valor que le de su proveedor
 
         //Get the session object  
         Properties props = new Properties();
