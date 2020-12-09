@@ -2,8 +2,6 @@ package org.ceti.sistemas.proyectoceti.models;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.ceti.sistemas.proyectoceti.beans.Inscrito;
 import org.ceti.sistemas.proyectoceti.beans.Usuario;
 import org.ceti.sistemas.proyectoceti.dao.Conexion;

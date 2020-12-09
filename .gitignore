@@ -31,4 +31,5 @@ nbdist/
 logger.log
 
 src/main/webapp/plugins
+src/main/webapp/vendor
 src/main/webapp/dist

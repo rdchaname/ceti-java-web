@@ -31,7 +31,11 @@ public class Curso implements Serializable {
     }
 
     public String getImagen() {
-        return imagen;
+        if (imagen == null) {
+            return "curso_defecto.png";
+        } else {
+            return imagen;
+        }
     }
 
     public void setImagen(String imagen) {
@@ -47,7 +51,7 @@ public class Curso implements Serializable {
     }
 
     public Double getCosto() {
-        return costo;
+        return Math.round(costo * 100.0) / 100.0;
     }
 
     public void setCosto(Double costo) {

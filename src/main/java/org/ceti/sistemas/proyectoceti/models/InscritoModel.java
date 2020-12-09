@@ -17,16 +17,9 @@ public class InscritoModel {
         inscritoDao = new InscritoDao(this.conexion);
     }
 
-    // 
     public Inscrito registrar(Inscrito inscrito) {
         Inscrito inscritoRegistrado = this.inscritoDao.registrar(inscrito);
-//        UsuarioDao usuarioDao = new UsuarioDao();
-//        Usuario usuario = new Usuario();
-//        usuarioDao.registrar(usuario);
-        // email confirmacion
-        // email administrador del sistema
         return inscritoRegistrado;
-//        return this.inscritoDao.registrar(inscrito);
     }
 
     public Boolean actualizar(Inscrito inscrito) {

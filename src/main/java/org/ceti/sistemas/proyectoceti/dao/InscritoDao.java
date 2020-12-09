@@ -99,7 +99,6 @@ public class InscritoDao {
                 inscrito.setNombres(resultado.getString("nombres"));
                 inscrito.setCelular(resultado.getString("celular"));
                 inscrito.setId(resultado.getInt("id"));
-                System.out.println("");
                 listado.add(inscrito);
             }
         }catch(SQLException error){

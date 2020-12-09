@@ -13,4 +13,7 @@
         <param-name>Country</param-name>
         <param-value>India</param-value>
     </context-param>
+    <welcome-file-list>
+        <welcome-file>inicio</welcome-file>
+    </welcome-file-list>
 </web-app>
